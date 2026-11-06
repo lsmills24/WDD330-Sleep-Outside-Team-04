@@ -1,33 +1,25 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+// import { setLocalStorage } from "./utils.mjs";  //removed since add product to cart function is now in ProductDetails.mjs
+import { getParam } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
+import ProductDetails from "./ProductDetails.mjs";
 
+const productId = getParam("product");
 const dataSource = new ProductData("tents");
 
-// function addProductToCart(product) {
-//   const cartItems = getLocalStorage("so-cart") || []; // get cart items from local storage and set new array if none exist
-//   console.log(typeof cartItems, Array.isArray(cartItems), cartItems);
-//   cartItems.push(product);
-//   setLocalStorage("so-cart", cartItems);
+const product = new ProductDetails(productId, dataSource);
+product.init();
+
+// console.log(dataSource.findProductById(productId)); //test to see if the product is being retrieved correctly by id
+
+// stole addproducttocart function to use in ProductDetails.mjs
+
+// // add to cart button event handler
+// async function addToCartHandler(e) {
+//   const product = await dataSource.findProductById(e.target.dataset.id);
+//   addProductToCart(product);
 // }
 
-function addProductToCart(product) {
-  let cartItems = getLocalStorage("so-cart");
-
-  if (!Array.isArray(cartItems)) {
-    cartItems = cartItems ? [cartItems] : [];
-  }
-
-  cartItems.push(product);
-  setLocalStorage("so-cart", cartItems);
-}
-
-// add to cart button event handler
-async function addToCartHandler(e) {
-  const product = await dataSource.findProductById(e.target.dataset.id);
-  addProductToCart(product);
-}
-
-// add listener to Add to Cart button
-document
-  .getElementById("addToCart")
-  .addEventListener("click", addToCartHandler);
+// // add listener to Add to Cart button
+// document
+//   .getElementById("addToCart")
+//   .addEventListener("click", addToCartHandler);
