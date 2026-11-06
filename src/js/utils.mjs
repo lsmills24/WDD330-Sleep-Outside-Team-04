@@ -23,6 +23,7 @@ export function setClick(selector, callback) {
 }
 
 // get the product id from the query string
+// returns a product id from the URL when requested
 export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
