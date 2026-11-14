@@ -1,7 +1,9 @@
-// import { setLocalStorage } from "./utils.mjs";  //removed since add product to cart function is now in ProductDetails.mjs
+import { loadHeaderFooter } from "./utils.mjs"; //removed since add product to cart function is now in ProductDetails.mjs
 import { getParam } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
 import ProductDetails from "./ProductDetails.mjs";
+
+loadHeaderFooter();
 
 const dataSource = new ProductData("tents");
 const productID = getParam("product");
