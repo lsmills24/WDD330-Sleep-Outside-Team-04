@@ -3,10 +3,10 @@ import { renderListWithTemplate } from "./utils.mjs";
 function productCardTemplate(product) {
   return `
     <li class="product-card">
-      <a href="product_pages/?product=${product.Id}">
-        <img src="${product.Image}" alt="${product.Name}">
+      <a href="/product_pages/index.html?product=${product.Id}">
+        <img src="${product.Images.PrimaryMedium}" alt="${product.Name}">
         <h2>${product.Brand.Name}</h2>
-        <h3>${product.Name}</h3>
+        <h3>${product.NameWithoutBrand}</h3>
         <p class="product-card__price">$${product.FinalPrice}</p>
       </a>
     </li>
@@ -21,12 +21,16 @@ export default class ProductList {
   }
 
   async init() {
-    const list = await this.dataSource.getData();
+    const list = await this.dataSource.getData(this.category);
     
-    const topProductIds = ["880RR", "985RF", "985PR", "344YJ"];
-    const topProducts = list.filter((product) => topProductIds.includes(product.Id));
-    this.renderList(topProducts);
+    // const topProductIds = ["880RR", "985RF", "985PR", "344YJ"];
+    // const topProducts = list.filter((product) => topProductIds.includes(product.Id));
+    this.renderList(list); // render all products instead of just the top products
+
     // this.renderList(list); // render all products instead of just the top products
+    //document.querySelector(".title").textContent = this.category;
+    const categoryTitle = this.category === "sleeping-bags" ? "Sleeping Bags" : this.category.charAt(0).toUpperCase() + this.category.slice(1);
+    document.querySelector(".title").textContent = categoryTitle;
   }
 
   renderList(list) {
