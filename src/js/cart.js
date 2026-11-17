@@ -2,6 +2,7 @@ import {
   getLocalStorage,
   setLocalStorage,
   loadHeaderFooter,
+  updateCartCount,
 } from "./utils.mjs";
 
 loadHeaderFooter();
@@ -16,7 +17,7 @@ function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Image}"
+      src="${item.Images.PrimaryMedium}"
       alt="${item.Name}"
     />
   </a>
@@ -44,6 +45,7 @@ document.querySelector(".product-list").addEventListener("click", (event) => {
   if (itemIndex !== -1) {
     cartItems.splice(itemIndex, 1);
     setLocalStorage("so-cart", cartItems);
+    updateCartCount();
     renderCartContents();
   }
 });
