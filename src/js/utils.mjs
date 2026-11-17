@@ -53,6 +53,17 @@ async function loadTemplate(path) {
   return template;
 }
 
+export function updateCartCount() {
+  const badge = document.querySelector("#cart-count");
+  if (!badge) return;
+  const cartItems = getLocalStorage("so-cart") || [];
+  badge.textContent = cartItems.length;
+  //counts number of items in cart to display when greater than 0, otherwise hides the badge
+  const count = (getLocalStorage("so-cart") || []).length;
+  badge.textContent = count > 0 ? count : "";
+  badge.hidden = count === 0;
+}
+
 export async function loadHeaderFooter() {
   // load the header & footer paths
   const headerTemplate = await loadTemplate("/partials/header.html");
@@ -62,5 +73,6 @@ export async function loadHeaderFooter() {
   const footerElement = document.querySelector("#main-footer");
   // render the header and footer templates into the DOM
   renderWithTemplate(headerTemplate, headerElement);
+  updateCartCount();
   renderWithTemplate(footerTemplate, footerElement);
 }
