@@ -16,7 +16,8 @@ function renderCartContents() {
     (sum, item) => sum + Number(item.FinalPrice),
     0,
   );
-  document.querySelector(".cart-total").textContent = `Total: $${totalPrice.toFixed(2)}`;
+  document.querySelector(".cart-total").textContent =
+    `Total: $${totalPrice.toFixed(2)}`;
 }
 
 function cartItemTemplate(item) {
@@ -60,7 +61,9 @@ document.querySelector(".product-list").addEventListener("click", (event) => {
 document.querySelector(".checkout-button").addEventListener("click", () => {
   const cartItems = getLocalStorage("so-cart") || [];
   if (cartItems.length === 0) {
-    alert("Your cart is empty. Please add items to your cart before checking out.");
+    alert(
+      "Your cart is empty. Please add items to your cart before checking out.",
+    );
     return;
   }
   window.location.href = "/checkout/index.html";
