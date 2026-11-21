@@ -46,7 +46,7 @@ function productDetailsTemplate(product) {
   productImage.src = product.Images.PrimaryExtraLarge;
   productImage.alt = product.NameWithoutBrand;
 
-  document.getElementById("productPrice").textContent = product.FinalPrice;
+  document.getElementById("productPrice").textContent = `$${product.FinalPrice.toFixed(2)}`;
   document.getElementById("productColor").textContent = product.Colors[0].ColorName;
   document.getElementById("productDesc").innerHTML = product.DescriptionHtmlSimple;
 
