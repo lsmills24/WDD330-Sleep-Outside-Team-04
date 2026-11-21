@@ -1,4 +1,33 @@
+import ExternalServices from "./ExternalServices.mjs";
 import { getLocalStorage, setLocalStorage, updateCartCount } from "./utils.mjs";
+
+const services = new ExternalServices();
+
+function formDataToJSON(formElement) {
+  // convert the form data to a JSON object
+  const formData = new FormData(formElement);
+  const convertedJSON = {};
+  formData.forEach((value, key) => {
+    convertedJSON[key] = value;
+  });
+  return convertedJSON;
+}
+
+// takes items currently stored in the cart (localstorage) and returns a simplified form
+function packageItems(items) {
+    // convert the list of products from localStorage to the simpler form required for the checkout process.
+    // An Array.map would be perfect for this process.
+    const simplifiedItems = items.map((item) => {
+    console.log(item);
+    return {
+      id: item.Id,
+      price: item.FinalPrice,
+      name: item.Name,
+      quantity: 1,
+    };
+  });
+  return simplifiedItems;
+}
 
 export default class CheckoutProcess {
   constructor(key, outputSelector) {
@@ -51,5 +80,28 @@ export default class CheckoutProcess {
     tax.textContent = `Tax: $${this.tax.toFixed(2)}`;
     shipping.textContent = `Shipping: $${this.shipping.toFixed(2)}`;
     total.textContent = `Order Total: $${this.orderTotal.toFixed(2)}`;
+  }
+
+  async checkout() {
+    // get the form element data by the form name
+    // convert the form data to a JSON order object using the formDataToJSON function
+    // populate the JSON order object with the order Date, orderTotal, tax, shipping, and list of items
+    // call the checkout method in the ExternalServices module and send it the JSON order data.
+    const formElement = document.querySelector("#checkout-form");
+    const order = formDataToJSON(formElement);
+
+    order.orderDate = new Date().toISOString();
+    order.orderTotal = this.orderTotal;
+    order.tax = this.tax;
+    order.shipping = this.shipping;
+    order.items = packageItems(this.list);
+    //console.log(order);
+
+    try {
+      const response = await services.checkout(order);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
   }
 }

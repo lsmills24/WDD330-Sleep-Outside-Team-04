@@ -9,7 +9,6 @@
     <title>Sleep Outside | Checkout</title>
     <link rel="stylesheet" href="/css/style.css" />
     <script src="../js/checkout.js" type="module"></script>
-
   </head>
 
   <body>
@@ -30,7 +29,9 @@
             <span class="cart-tax">Tax: $0.00</span><br />
             <span class="cart-shipping">Shipping: $0.00</span><br />
             <span class="order-total">Order Total: $0.00</span><br />
-            <small class="checkout-note">*Tax and shipping are calculated after entering zip code</small>
+            <small class="checkout-note"
+              >*Tax and shipping are calculated after entering zip code</small
+            >
           </p>
         </div>
       </section>
@@ -39,9 +40,9 @@
         <div class="form-group">
           <h3>Personal Information</h3>
           <label for="name">First Name:</label>
-          <input type="text" id="name" name="name" required />
+          <input type="text" id="name" name="fname" required />
           <label for="last-name">Last Name:</label>
-          <input type="text" id="last-name" name="last-name" required />
+          <input type="text" id="last-name" name="lname" required />
           <label for="email">Email:</label>
           <input type="email" id="email" name="email" required />
         </div>
@@ -61,7 +62,7 @@
         <div class="form-group">
           <h3>Payment Information</h3>
           <label for="credit-card">Card Number:</label>
-          <input type="text" id="credit-card" name="credit-card" required />
+          <input type="text" id="credit-card" name="cardNumber" required />
           <label for="expiration">Expiration Date:</label>
           <input type="text" id="expiration" name="expiration" required />
           <label for="cvv">Security Code:</label>
