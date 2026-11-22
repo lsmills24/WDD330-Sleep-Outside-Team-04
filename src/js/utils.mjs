@@ -76,3 +76,32 @@ export async function loadHeaderFooter() {
   updateCartCount();
   renderWithTemplate(footerTemplate, footerElement);
 }
+
+export function alertMessage(message, scroll = true) {
+  // creates an element to hold the alert
+  const alert = document.createElement("div");
+  // adds class to style it
+  alert.classList.add("alert");
+  // set the contents with an X option to close the alert
+  alert.append(document.createTextNode(message));
+  const closeButton = document.createElement("button");
+  closeButton.type = "button";
+  closeButton.setAttribute("aria-label", "Close alert");
+  closeButton.textContent = "X";
+  alert.append(closeButton);
+  
+  // add a listener to see if they close it
+  // if they did, then remove the child
+  alert.addEventListener("click", function(e) {
+    if (e.target === closeButton) {
+      main.removeChild(alert);
+    }
+  })
+  // add alert to the top of main
+  const main = document.querySelector("main");
+  main.prepend(alert);
+  // make sure they see the alert by scrolling to the top of the window
+  // you may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
+  if(scroll)
+    window.scrollTo(0,0);
+}

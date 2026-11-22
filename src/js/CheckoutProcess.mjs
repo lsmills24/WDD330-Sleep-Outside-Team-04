@@ -100,6 +100,10 @@ export default class CheckoutProcess {
     try {
       const response = await services.checkout(order);
       console.log(response);
+      setLocalStorage(this.key, []); // clears local storage after a successful POST
+      this.list = []; // empties the cart list
+      updateCartCount(); // resets the cart item count 
+      return response;
     } catch (err) {
       console.log(err);
     }
