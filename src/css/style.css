@@ -114,6 +114,35 @@ button {
   border-bottom: 2px solid var(--primary-color);
 }
 
+.alert {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 44px;
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--primary-color);
+  background-color: #ffb86b;
+  color: var(--dark-grey);
+  font-family: var(--font-body);
+  font-size: var(--font-base);
+  box-sizing: border-box;
+}
+
+.alert button {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--dark-grey);
+  font: 20px/1 var(--font-body);
+}
+
 /* End utility classes */
 
 /* Cart icon styles */
